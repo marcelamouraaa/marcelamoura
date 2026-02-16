@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Scientist Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=DM+Mono:wght@400;500&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #11151C;
+            --deep-blue: #212D40;
+            --slate-blue: #364156;
+            --mauve: #7D4E57;
+            --coral: #D66853;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--midnight);
+            color: #E8E8E8;
+            overflow-x: hidden;
+        }
+
+        /* Animated background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(214, 104, 83, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(125, 78, 87, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(17, 21, 28, 0.95), rgba(17, 21, 28, 0));
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #E8E8E8;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            color: #E8E8E8;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--coral);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: #E8E8E8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        .hero-text h1 strong {
+            font-weight: 600;
+            color: var(--coral);
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #C5C5C5;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.7s backwards;
+        }
+
+        .btn {
+            font-family: 'DM Mono', monospace;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--coral);
+            color: var(--midnight);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--mauve);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-primary:hover {
+            color: #E8E8E8;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #E8E8E8;
+            border: 1px solid var(--slate-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--slate-blue);
+            border-color: var(--slate-blue);
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeIn 1.2s ease-out 0.9s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .data-visualization {
+            width: 100%;
+            height: 500px;
+            background: var(--deep-blue);
+            border-radius: 2px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(54, 65, 86, 0.5);
+        }
+
+        .data-visualization::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(214, 104, 83, 0.08) 50%, transparent 100%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .data-points {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 1rem;
+        }
+
+        .data-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--coral), var(--mauve));
+            border-radius: 2px 2px 0 0;
+            animation: growBar 1.5s ease-out backwards;
+            position: relative;
+        }
+
+        .data-bar::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--coral);
+            box-shadow: 0 0 15px rgba(214, 104, 83, 0.6);
+        }
+
+        @keyframes growBar {
+            from {
+                height: 0;
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .data-bar:nth-child(1) { height: 45%; animation-delay: 1.2s; }
+        .data-bar:nth-child(2) { height: 75%; animation-delay: 1.3s; }
+        .data-bar:nth-child(3) { height: 60%; animation-delay: 1.4s; }
+        .data-bar:nth-child(4) { height: 90%; animation-delay: 1.5s; }
+        .data-bar:nth-child(5) { height: 55%; animation-delay: 1.6s; }
+        .data-bar:nth-child(6) { height: 80%; animation-delay: 1.7s; }
+        .data-bar:nth-child(7) { height: 70%; animation-delay: 1.8s; }
+
+        /* About Section */
+        .about {
+            padding: 8rem 4rem;
+            background: var(--deep-blue);
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(214, 104, 83, 0.3), transparent);
+        }
+
+        .about-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--coral);
+            margin-bottom: 2rem;
+        }
+
+        .about-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            color: #E8E8E8;
+            margin-bottom: 2rem;
+        }
+
+        .about-description {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #C5C5C5;
+            margin-bottom: 3rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .expertise-item {
+            background: rgba(54, 65, 86, 0.3);
+            padding: 2rem;
+            border-left: 2px solid var(--coral);
+            transition: all 0.3s ease;
+        }
+
+        .expertise-item:hover {
+            background: rgba(54, 65, 86, 0.5);
+            transform: translateX(8px);
+            border-left-color: var(--mauve);
+        }
+
+        .expertise-item h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #E8E8E8;
+            margin-bottom: 0.8rem;
+        }
+
+        .expertise-item p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #B8B8B8;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 8rem 4rem;
+            background: var(--midnight);
+        }
+
+        .projects-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .projects-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #E8E8E8;
+            margin-bottom: 1.5rem;
+        }
+
+        .projects-header p {
+            font-size: 1.2rem;
+            color: #B8B8B8;
+        }
+
+        .projects-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: var(--deep-blue);
+            color: #E8E8E8;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(54, 65, 86, 0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--coral);
+            transition: height 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--slate-blue);
+        }
+
+        .project-card:hover::before {
+            height: 100%;
+        }
+
+        .project-type {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--coral);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #E8E8E8;
+        }
+
+        .project-card p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #B8B8B8;
+            margin-bottom: 2rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.4rem 1rem;
+            background: rgba(125, 78, 87, 0.2);
+            color: var(--mauve);
+            border: 1px solid var(--mauve);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Publications Section */
+        .publications {
+            padding: 8rem 4rem;
+            background: var(--slate-blue);
+            color: #E8E8E8;
+        }
+
+        .publications-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .publications h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .publication-item {
+            padding: 2.5rem 0;
+            border-bottom: 1px solid rgba(214, 213, 201, 0.15);
+            transition: padding-left 0.3s ease;
+        }
+
+        .publication-item:hover {
+            padding-left: 2rem;
+        }
+
+        .publication-venue {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--coral);
+            margin-bottom: 1rem;
+        }
+
+        .publication-item h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #E8E8E8;
+        }
+
+        .publication-authors {
+            font-size: 1rem;
+            color: #B8B8B8;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .publication-abstract {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #B8B8B8;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 4rem;
+            background: var(--deep-blue);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: #E8E8E8;
+            margin-bottom: 2rem;
+        }
+
+        .contact p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #C5C5C5;
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.9rem;
+            color: #E8E8E8;
+            text-decoration: none;
+            padding: 1.2rem 2.5rem;
+            border: 1px solid var(--slate-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: var(--midnight);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--midnight);
+            color: #888;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(54, 65, 86, 0.3);
+        }
+
+        footer p {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 2rem;
+            }
+
+            .hero, .about, .projects, .publications, .contact {
+                padding: 6rem 2rem;
+            }
+
+            .hero-content, .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 4rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .about-title, .projects-header h2, .publications h2, .contact h2 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Your Name</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#publications">Publications</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    Transforming data into
+                    <strong>actionable insights</strong>
+                </h1>
+                <p>
+                    Data scientist bridging rigorous research methodology with practical industry applications. 
+                    Specializing in machine learning, statistical modeling, and turning complex datasets into strategic decisions.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="data-visualization">
+                    <div class="data-points">
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                        <div class="data-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-content">
+            <div>
+                <div class="section-label">About Me</div>
+                <h2 class="about-title">Research rigor meets industry impact</h2>
+                <p class="about-description">
+                    With a background spanning academic research and applied industry work, I bring a unique perspective 
+                    to data science challenges. My approach combines theoretical depth with practical execution, ensuring 
+                    solutions that are both methodologically sound and business-ready.
+                </p>
+            </div>
+            <div class="expertise-grid">
+                <div class="expertise-item">
+                    <h3>Machine Learning</h3>
+                    <p>Deep learning, ensemble methods, and predictive modeling for classification and regression tasks.</p>
+                </div>
+                <div class="expertise-item">
+                    <h3>Statistical Analysis</h3>
+                    <p>Bayesian inference, hypothesis testing, and experimental design for robust conclusions.</p>
+                </div>
+                <div class="expertise-item">
+                    <h3>Data Engineering</h3>
+                    <p>ETL pipelines, database optimization, and scalable data infrastructure development.</p>
+                </div>
+                <div class="expertise-item">
+                    <h3>Visualization</h3>
+                    <p>Interactive dashboards and compelling data stories that drive stakeholder understanding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="projects-header">
+            <h2>Featured Projects</h2>
+            <p>A selection of work spanning research and industry applications</p>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-type">Industry • Machine Learning</div>
+                <h3>Customer Churn Prediction</h3>
+                <p>
+                    Built an ensemble model achieving 92% accuracy in predicting customer churn, enabling proactive 
+                    retention strategies and saving $2M annually in customer acquisition costs.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">XGBoost</span>
+                    <span class="tag">SQL</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-type">Research • NLP</div>
+                <h3>Sentiment Analysis Framework</h3>
+                <p>
+                    Developed a multi-lingual sentiment analysis system using transformer models, published in 
+                    leading NLP conference with 150+ citations.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">BERT</span>
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Research</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-type">Industry • Time Series</div>
+                <h3>Demand Forecasting System</h3>
+                <p>
+                    Created an automated forecasting pipeline for inventory optimization, reducing waste by 35% 
+                    and improving supply chain efficiency across 50+ locations.
+                </p>
+                <div class="project-tags">
+                    <span class="tag">Prophet</span>
+                    <span class="tag">AWS</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="publications" id="publications">
+        <div class="publications-content">
+            <h2>Publications</h2>
+            <div class="publication-item">
+                <div class="publication-venue">NeurIPS 2024</div>
+                <h3>Adaptive Learning Rates in Transformer Architectures: A Comprehensive Study</h3>
+                <div class="publication-authors">Smith, J., Your Name, Johnson, K.</div>
+                <p class="publication-abstract">
+                    We present a novel approach to adaptive learning rate scheduling in transformer models, 
+                    demonstrating improved convergence and generalization across multiple benchmark datasets.
+                </p>
+            </div>
+            <div class="publication-item">
+                <div class="publication-venue">Journal of Machine Learning Research 2023</div>
+                <h3>Robust Feature Selection in High-Dimensional Datasets</h3>
+                <div class="publication-authors">Your Name, Davis, M., Chen, L.</div>
+                <p class="publication-abstract">
+                    A systematic investigation of feature selection methods under various noise conditions, 
+                    with theoretical guarantees and empirical validation on real-world datasets.
+                </p>
+            </div>
+            <div class="publication-item">
+                <div class="publication-venue">ICML 2023</div>
+                <h3>Causal Inference in Observational Data: New Perspectives</h3>
+                <div class="publication-authors">Brown, A., Your Name</div>
+                <p class="publication-abstract">
+                    Novel techniques for identifying causal relationships in observational data, with applications 
+                    to healthcare and social sciences.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Let's Connect</h2>
+            <p>
+                Interested in collaboration, consulting, or just want to discuss data science? 
+                I'm always open to new opportunities and conversations.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+                <a href="https://linkedin.com/in/yourprofile" class="contact-link">LinkedIn</a>
+                <a href="https://github.com/yourusername" class="contact-link">GitHub</a>
+                <a href="https://scholar.google.com/yourprofile" class="contact-link">Google Scholar</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for fade-in effect
+        document.querySelectorAll('.expertise-item, .project-card, .publication-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
