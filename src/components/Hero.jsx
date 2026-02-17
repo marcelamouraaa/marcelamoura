@@ -46,8 +46,8 @@ export default function Hero() {
             </strong>
           </h1>
           <p>
-          A <b>Data Scientist</b> fascinated by what happens when physics collides with machine learning.
-          I enjoy applying ML to real-world problems and currently exploring this in the field of magnetospheric physics.
+          A <b>Data Scientist</b> passionate about applying machine learning  to solve complex, real-world problems. 
+          I love finding patterns in challenging datasets and building models that turn data into actionable insights.
           </p>
           <div className="cta-buttons">
             <a href="#projects" className="btn btn-primary">View Projects</a>
